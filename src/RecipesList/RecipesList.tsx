@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+type Recipe = {
+	id: number;
+	name: string;
+}
+
 export default function RecipesList() {
 	const [recipes, setRecipes] = useState([]);
 
@@ -16,7 +21,7 @@ export default function RecipesList() {
 				Recipes List
 			</div>
 				<ul>
-					{recipes.map(recipe => (
+					{recipes.map((recipe: Recipe) => (
 						<li key={recipe.id}>{recipe.name}</li>
 					))}
 				</ul>
