@@ -3,7 +3,10 @@ import axios from 'axios';
 
 type Recipe = {
 	id: number;
-	name: string;
+	type: 'recipes';
+	attributes: {
+		name: string;
+	}
 }
 
 export default function RecipesList() {
@@ -11,9 +14,8 @@ export default function RecipesList() {
 
 	useEffect(() => {
     axios.get('/recipes')
-		.then(res => setRecipes(res.data))
+		.then(res => setRecipes(res.data.data))
 	}, []);
-
 
 	return (
 		<div>
@@ -21,8 +23,8 @@ export default function RecipesList() {
 				Recipes List
 			</div>
 				<ul>
-					{recipes.map((recipe: Recipe) => (
-						<li key={recipe.id}>{recipe.name}</li>
+					{recipes?.map((recipe: Recipe) => (
+						<li key={recipe.id}>{recipe.attributes.name}</li>
 					))}
 				</ul>
 		</div>
